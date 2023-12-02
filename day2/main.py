@@ -34,10 +34,9 @@ def part1(input_text):
     game_ids = []
     with open(input_text) as file:
         for index, line in enumerate(file):
-            line_split = line.split("Game ")
-            cubes = line_split[1].split(": ")[1]
+            cubes = line.split("Game ")[1].split(": ")[1]
             matches = get_sets(cubes)
-            valid_games(matches) and game_ids.append(index+1)
+            valid_games(matches) and game_ids.append(index + 1)
 
     print(f"Result part1: {sum(game_ids)} with a time of {time.time() - start_time}")
 
@@ -47,8 +46,7 @@ def part2(input_text):
     minimum_power = []
     with open(input_text) as file:
         for line in file:
-            line_split = line.split("Game ")
-            cubes = line_split[1].split(": ")[1]
+            cubes = line.split("Game ")[1].split(": ")[1]
             matches = get_sets(cubes)
             minimum_power.append(calculate_power(matches))
 
