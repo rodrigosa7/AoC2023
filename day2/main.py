@@ -22,24 +22,22 @@ def calculate_power(matches):
     return max_values["red"] * max_values["green"] * max_values["blue"]
 
 
-def valid_games(matches, game_id):
+def valid_games(matches):
     is_valid = all(entry[1] != color or int(entry[0]) <= threshold for threshold, color in
                    [(BLUE, 'blue'), (RED, 'red'), (GREEN, 'green')] for entry in matches)
 
-    return int(game_id) if is_valid else 0
+    return is_valid
 
 
 def part1(input_text):
     start_time = time.time()
     game_ids = []
     with open(input_text) as file:
-        for line in file:
+        for index, line in enumerate(file):
             line_split = line.split("Game ")
-            id_game_patter = re.compile(r'Game (\d+)')
-            id_game = re.search(id_game_patter, line).group(1)
             cubes = line_split[1].split(": ")[1]
             matches = get_sets(cubes)
-            game_ids.append(valid_games(matches, id_game))
+            valid_games(matches) and game_ids.append(index)
 
     print(f"Result part1: {sum(game_ids)} with a time of {time.time() - start_time}")
 
