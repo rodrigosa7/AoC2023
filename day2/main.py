@@ -37,7 +37,7 @@ def part1(input_text):
             line_split = line.split("Game ")
             cubes = line_split[1].split(": ")[1]
             matches = get_sets(cubes)
-            valid_games(matches) and game_ids.append(index)
+            valid_games(matches) and game_ids.append(index+1)
 
     print(f"Result part1: {sum(game_ids)} with a time of {time.time() - start_time}")
 
